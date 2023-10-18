@@ -6,19 +6,19 @@
 \CorrectChoiceEmphasis{\color{red}\bfseries\boldmath}
 % use circled uppercase letters for choices
 \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
-            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+        \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
 \renewcommand{\choicelabel}{\circled{{\thechoice}}}
 % formatting of Question blocks
 \qformat{
-    \parbox[][24pt][t]{\columnwidth}{ % for creating space below
+    \parbox[][24pt][t]{\dimexpr\columnwidth-3pt}{ % for creating space below
         \Large\textbf{
             $\diamondsuit$
             Question \thesetquestion~of \numqinrange{\set}\;
             \textit{%
                 \hfill%
                 \ifthenelse{\equal{\thequestiontitle}{\thequestion}}%
-                    {}%
-                    {[\thequestiontitle]\;}%
+                {}%
+                {[\thequestiontitle]\;}%
                 [\ifthenelse{\equal{\totalpoints}{0}}{%
                         \marks\totalbonuspoints\;(bonus)%
                     }{%
@@ -34,15 +34,15 @@
 }
 % formatting of Bonus Question blocks
 \bonusqformat{
-    \parbox[][24pt][t]{\columnwidth}{ % for creating space below
+    \parbox[][24pt][t]{\dimexpr\columnwidth-3pt}{ % for creating space below
         \Large\textbf{
             $\diamondsuit$
             Question \thesetquestion~of \numqinrange{\set}\;
             \textit{%
                 \hfill%
                 \ifthenelse{\equal{\thequestiontitle}{\thequestion}}
-                    {}
-                    {[\thequestiontitle]\;}
+                {}
+                {[\thequestiontitle]\;}
                 [\marks\totalbonuspoints\;(bonus)]%
             }%
         }%
