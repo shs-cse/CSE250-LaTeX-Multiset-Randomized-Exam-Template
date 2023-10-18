@@ -2,41 +2,41 @@
 
 \xdef\ra{\fpeval{randint(1,9)*10}} % to test if works ok with solution
 
-\begin{cctikz}[scale=0.75, transform shape] 
-\draw   (0,0)   
+\begin{cctikz}[scale=0.75, transform shape]
+        \draw   (0,0)
         to[V, l_=100<\V>, label/align=rotate] (0,2)
         to[R, l=10<\ohm>] (2,2)
         to[R, l=20<\ohm>, *-] (4,2)
         to[cV, l=$4v_0$, invert] (4,0)
         --(0,0)
-        (2,0) 
+        (2,0)
         --(2,2)
         to[short, i=$i_0$] (2,4)
         to[V, l=120<\V>] (4,4)
-        to[short, -*] (5,4) node[above]{$v_1$} 
+        to[short, -*] (5,4) node[above]{$v_1$}
         --(6,4)
-        to[R, l=40<\ohm>] (8,4) 
+        to[R, l=40<\ohm>] (8,4)
         --(8,2)
         --(6,2)
         to[cI, l=$2i_0$, invert] (6,0)
         --(4,0)
         (6,0)
-        --(8,0) 
+        --(8,0)
         (8,2) node[above right]{$v_2$}
-        to[R, l=\ra<\ohm>, label/align=rotate, *-] (8,0) 
+        to[R, l=\ra<\ohm>, label/align=rotate, *-] (8,0)
         (8,2)
         --(10,2)
         to[R, l=80<\ohm>, v=$v_0$, label/align=rotate] (10,0)
         --(8,0)
-;
+        ;
 \end{cctikz}
 
 How many nodes are in this circuit?
 
 \begin{oneparchoices}
-    \CorrectChoice 5
-    \choice 4
-    \choice 3
-    \choice 6
-    \choice 7
+        \correctchoice 5
+        \choice 4
+        \choice 3
+        \choice 6
+        \choice 7
 \end{oneparchoices}

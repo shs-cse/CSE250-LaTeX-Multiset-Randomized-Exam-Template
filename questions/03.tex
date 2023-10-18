@@ -14,8 +14,8 @@
 \xdef\rbc{\fpeval{\ra*(\rb+\rc)/(\ra+\rb+\rc)}} % \rx*(\rz+\ry)
 \xdef\rca{\fpeval{\rb*(\rc+\ra)/(\ra+\rb+\rc)}} % \ry*(\rz+\rx)
 
-\begin{cctikz}[x=2cm,y=2cm] 
-\draw   (0,0)
+\begin{cctikz}[x=2cm,y=2cm]
+        \draw   (0,0)
         to[R, l_=\ra<\kO>, *-*] ++(0:1.5)
         -- ++(-30:0.25)
         node[ocirc]{} node[below right]{$c$}
@@ -28,16 +28,16 @@
         -- ++(-150:0.25)
         node[ocirc]{} node[below left]{$b$}
         ++(30:0.25)
-;
+        ;
 \end{cctikz}
 \filbreak
 
 Which of the following statements is true?
 
 \begin{choices}[keeplast]
-    \CorrectChoice $R_{ab} = \qty{\rab}{\kO}, R_{bc} = \qty{\rbc}{\kO}, R_{ca} = \qty{\rca}{\kO}$
-    \choice $R_{ab} = \qty{\rc}{\kO}, R_{bc} = \qty{\ra}{\kO}, R_{ca} = \qty{\rb}{\kO}$
-    \choice $R_{ab} = \qty{\rab}{\ohm}, R_{bc} = \qty{\rbc}{\ohm}, R_{ca} = \qty{\rca}{\ohm}$
-    \choice $R_{ab} = R_{bc} = R_{ca} = \qty{\fpeval{round(1/(1/\ra + 1/\rb + 1/\rc),3)}}{\kO}$
-    \choice None of the above
+        \correctchoice $R_{ab} = \qty{\rab}{\kO}, R_{bc} = \qty{\rbc}{\kO}, R_{ca} = \qty{\rca}{\kO}$
+        \choice $R_{ab} = \qty{\rc}{\kO}, R_{bc} = \qty{\ra}{\kO}, R_{ca} = \qty{\rb}{\kO}$
+        \choice $R_{ab} = \qty{\rab}{\ohm}, R_{bc} = \qty{\rbc}{\ohm}, R_{ca} = \qty{\rca}{\ohm}$
+        \choice $R_{ab} = R_{bc} = R_{ca} = \qty{\fpeval{round(1/(1/\ra + 1/\rb + 1/\rc),3)}}{\kO}$
+        \choice None of the above
 \end{choices}

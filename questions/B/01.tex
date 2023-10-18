@@ -1,26 +1,26 @@
 \titledquestion{CO3}[2]
 % find open circuit voltage
 \begin{cctikz}[x=0.68cm]
-    \draw (0,0)
-    to[R=1.5<\kO>] ++(left:6)
-    to[V, l_=5<\V>] ++(up:3)
-    to[R=500<\ohm>] ++(right:3)
-    to[I, l=3<\mA>, v<=$v_x$] ++(right:3)
-    to[R=3<\kO>] ++(right:3)
-    to[I, l=1<\mA>, v=$v_y$, *-*] ++(down:3)
-    to[R=4<\kO>] ++(left:3)
-    to[R=5<\kO>, i>_=$i_x$, *-*] ++(up:3)
-    ++(right:3)
-    to[R=6<\kO>] ++(right:3)
-    -- ++(down:0.5)
-    to[open, o-o, v=$v_z$] ++(down:2)
-    -- ++(down:0.5)
-    -- ++(left:3)
-    ;
+        \draw (0,0)
+        to[R=1.5<\kO>] ++(left:6)
+        to[V, l_=5<\V>] ++(up:3)
+        to[R=500<\ohm>] ++(right:3)
+        to[I, l=3<\mA>, v<=$v_x$] ++(right:3)
+        to[R=3<\kO>] ++(right:3)
+        to[I, l=1<\mA>, v=$v_y$, *-*] ++(down:3)
+        to[R=4<\kO>] ++(left:3)
+        to[R=5<\kO>, i>_=$i_x$, *-*] ++(up:3)
+        ++(right:3)
+        to[R=6<\kO>] ++(right:3)
+        -- ++(down:0.5)
+        to[open, o-o, v=$v_z$] ++(down:2)
+        -- ++(down:0.5)
+        -- ++(left:3)
+        ;
 \end{cctikz}
 
 \begin{choices}
-    \CorrectChoice a
-    \choice b
-    \choice c
+        \correctchoice a
+        \choice b
+        \choice c
 \end{choices}

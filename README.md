@@ -3,6 +3,13 @@ This template uses the $\rm\LaTeX$ [documentclass called `exam`](https://math.mi
 to automatically add up marks for all the questions and bonus questions. 
 Summarized instructions for creating a question:
 
+## Relevant Docs
+- [Exam class](https://math.mit.edu/~psh/exam/examdoc.pdf) 
+- [Exam Random Choices](https://mirror.niser.ac.in/ctan/macros/latex/contrib/exam-randomizechoices/exam-randomizechoices-doc.pdf)
+- [`xfp` package documentation](http://mirrors.ctan.org/macros/latex/contrib/l3packages/xfp.pdf)
+- [$\rm\LaTeX3$ interfaces](https://ctan.math.illinois.edu/macros/latex/contrib/l3kernel/interface3.pdf) 
+
+
 ## Adding questions
 Inside [`questions/`](/questions/) folder, create a new `.tex` file numbered from `1` (or `01`) to `99`. 
 Any skipped file number will automatically be filled sequentially.
@@ -26,7 +33,25 @@ questions
 ```
 
 ## Set-specific questions
+Questions in [`questions/`](/questions/) folder are included in all sets. 
+
 If you want to have different questions for each set, you may create folders for them. For example, [`questions/A/01.tex`](/questions/A/01.tex) will replace (or add) [`questions/01.tex`](/questions/01.tex) for set `A`.
+
+If you want to remove a question from a certain set, it can be done by adding an empty file. For example, if you don't want [`questions/03.tex`](/questions/03.tex) in set A, you create the empty file [`questions/A/03.tex`](/questions/A/03.tex)
+
+## Question Randomization
+Random parameters can be used to create questions. Useful commands in this case:
+```latex
+\inteval{randint(0,5)}
+\fpeval{0.3*5/sin(20)}
+```
+Use `\xdef` to save these values to a macro. e.g.
+```latex
+\xdef\ra{\inteval{randint(0,5)}}
+\xdef\rb{\fpeval{0.3*5/sin(20)}}
+```
+Checkout [`xfp` package documentation](http://mirrors.ctan.org/macros/latex/contrib/l3packages/xfp.pdf) for what else can be done.
+Moreover [`latex3 interface`s](https://ctan.math.illinois.edu/macros/latex/contrib/l3kernel/interface3.pdf) can be invoked using `\ExplSyntaxOn ... \ExplSyntaxOff`. 
 
 ## CO/PO Mapping
 For mapping course/program outcome (CO/PO) with a question, please use `\titledquestion{CO1}` and `\bonustitledquestion{CO2}` 
@@ -112,14 +137,13 @@ However, if the question should be printed for a different day, it can be done b
 ```
 
 ## Solutions
-[`exam`](https://math.mit.edu/~psh/exam/examdoc.pdf) documentclass supports directly 
-by including solutions using `\solution`, `\solutionbox` etc. environments.
-These can be shown by including `answers` argument in the documentclass declaration.
+[`exam`](https://math.mit.edu/~psh/exam/examdoc.pdf) documentclass supports directly by including solutions using `\solution`, `\solutionbox` etc. environments.
+These can be shown by setting `\showsolutions` to `true`.
 
 <table><tr><td>
 
 ```latex
-\documentclass[a4paper, addpoints]{exam}     
+\def\showsolutions{true}     
 ```
 </td><td>
 <img width="485" alt="image" src="https://user-images.githubusercontent.com/67824850/217028070-d8a10e83-78d2-497e-85fc-d67210c34e9a.png">
@@ -127,8 +151,7 @@ These can be shown by including `answers` argument in the documentclass declarat
 <tr><td>
 
 ```latex
-\documentclass[addpoints, a4paper]{exam}     
-\printanswers % comment to hide answers     
+\def\showsolutions{true}     
 ```
 </td><td>
 <img width="485" alt="image" src="https://user-images.githubusercontent.com/67824850/217027839-480caeb4-04fe-4390-88cc-7fa5683c6bfe.png">
@@ -138,4 +161,14 @@ These can be shown by including `answers` argument in the documentclass declarat
 The order of questions are shuffled by default. If not desired, it can be turned off by setting `\shufflequestionorder` to `false`.
 ```latex
 \def\shufflequestionorder{true} % false -> no question shuffling
+```
+
+## Choice Shuffling
+Similar to the question shuffling, setting `\shufflequestionorder` to `false` will add the mcq choices as written in question files.
+
+## Other Options
+```latex
+\def\questionsintwocolumns{true} % false -> questions in one column
+\def\insertomrsheet{true} % false -> no OMR sheet
+\def\eachsetonsinglepaper{A3} % generate exams in booklet on A3 paper
 ```

@@ -57,5 +57,5 @@
     \Large \textbf{\assessment \ifdefstring\showsetinheader{true}{~$\blacktriangleright $ Set \set}{}}
 }
 {
-    {Page \thepage~of \numpages}
+    {Page \thepage~of \ifdefstring{\eachsetonsinglepaper}{A3}{\numpagesperset}{\pageref{end@\set}}}
 }

@@ -5,8 +5,8 @@
 \xdef\ra{\fpeval{randint(12,20)}}
 \xdef\rb{\fpeval{randint(3,11)}}
 
-\begin{cctikz}[x=2cm,y=2cm] 
-\draw   (0,0)
+\begin{cctikz}[x=2cm,y=2cm]
+        \draw   (0,0)
         % node[above]{$v_1$}
         to[R, l=\ra<\ohm>, i=$i$] ++(1.5,0)
         to[V, l=\vb<\V>, invert] ++(1.5,0)
@@ -15,16 +15,16 @@
         -- ++(-1.5,0)
         -- ++(-1.5,0)
         to[V, l=\va<\V>] (0,0)
-;
+        ;
 \end{cctikz}
 \filbreak
 
 What's the relation between $v_1, v_2$ and $i$?
 
 \begin{choices}[keeplast]
-    \CorrectChoice $-\va + \ra i + \vb + \rb i = 0$
-    \choice $-\va + \ra i - \vb + \rb i = 0$
-    \choice $-\va - \ra i + \vb + \rb i = 0$
-    \choice $-\va - \ra i - \vb + \rb i = 0$
-    \choice None of the above
+        \correctchoice $-\va + \ra i + \vb + \rb i = 0$
+        \choice $-\va + \ra i - \vb + \rb i = 0$
+        \choice $-\va - \ra i + \vb + \rb i = 0$
+        \choice $-\va - \ra i - \vb + \rb i = 0$
+        \choice None of the above
 \end{choices}

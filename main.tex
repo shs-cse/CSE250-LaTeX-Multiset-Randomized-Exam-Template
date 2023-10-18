@@ -5,38 +5,63 @@
 % section related parameters
 \def\semester{Fall 2023}
 \def\sect{18} % can be omitted by commenting
-% \def\faculty{SDS} % can be omitted by commenting
+\def\faculty{SDS} % can be omitted by commenting
 % assessment related parameters
 \def\assessment{Class Assignment 1}
 \def\duration{1 hour 20 minutes}
 \def\date{September 28, 2023} % can be set to \today by commenting
 % set related parameters
-\def\minnumpagesperset{2} % A4=2, A3=4
 \def\setbegin{A} % uppercase letters A to Z, AA, AB...
 \def\setend{J} % uppercase letters A to Z, AA, AB...
+\def\numpagesperset{0} % minimum number of pages per set
 % options for pdf generation
+\def\eachsetonsinglepaper{A3} % options: A3, A4, false. print each set in a single paper
+\def\showsetinheader{true} % show set in page headers
+\def\showsolutions{true} % show answers in the generated pdf
 \def\shufflequestionorder{true}
-\def\questionsintwocolumn{true}
+\def\shufflechoiceorder{true}
+\def\questionsintwocolumns{true}
 \def\insertomrsheet{true}
-\def\showsetinheader{true}
+
 % --------------------------------PACKAGES------------------------------------------
 \documentclass[addpoints, a4paper]{exam}
-\printanswers % comment to hide answers
-\usepackage[overload]{exam-randomizechoices} % useful options: norandomize, overload
 \usepackage{anyfontsize, amssymb, amsmath, refcount}
 \usepackage[shortlabels]{enumitem}
 \usepackage[siunitx, american, RPvoltages]{circuitikz}
-\sisetup{parse-numbers=false}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
 \usepackage[many]{tcolorbox}
-% ---------------------------------PREAMBLE-----------------------------------------
-\setlength{\columnseprule}{0.4pt} % for two columns
-% typeset marks writing
-\def\marks#1{%
-    \ifthenelse{\equal{#1}{0} \or \equal{#1}{1} \or \equal{#1}{\half}}
-    {#1 mark}{#1 marks}%
-}%
+
+% ---------------------------OPTIONAL PACKAGES--------------------------------------
+% print answers from exam class
+\ifdefstring{\showsolutions}{true}{\printanswers}{}
+% separator between two columns
+\setlength{\columnseprule}{0.4pt}
+% shuffle mcq choices
+\ifdefstring{\shufflechoiceorder}{true}{}{
+    \PassOptionsToPackage{norandomize}{exam-randomizechoices}
+}
+\usepackage[overload]{exam-randomizechoices}
+% single A3 or A4 paper case
+\ifdefstring{\eachsetonsinglepaper}{A3}{
+    \usepackage[print,four]{booklet}
+    \source{\magstep0}{\paperwidth}{\paperheight}
+    \target{\magstep0}{2\paperwidth}{\paperheight}
+    \AtBeginDocument{
+        \ifpdf
+            \setpdftargetpages
+        \else
+            \setdvipstargetpages
+        \fi
+    }
+    \def\numpagesperset{4} % A4=2, A3=4
+}{
+    \ifdefstring{\eachsetonsinglepaper}{A4}{
+        \def\numpagesperset{2} % A4=2, A3=4
+    }{}
+}
+% siunitx package setup
+\sisetup{parse-numbers=false}
 % short-hand for resistor units, e.g. 
 % in circuitikz: 1<\MO>, 2<\mA>, 3<\kV>, 4<\uF>, 5<\nH>, 6<\C> 
 % in math-mode: \qty{1}{\MO}
@@ -44,7 +69,14 @@
 \DeclareSIUnit{\kO}{\kilo\ohm}
 \DeclareSIUnit{\MO}{\mega\ohm}
 % centered circitikz environment
-\newenvironment{cctikz}[1][\unskip]{\begin{center}\begin{tikzpicture}[#1]}{\end{tikzpicture}\end{center}}
+\newenvironment{cctikz}[1][\unskip]{%
+    \begin{center}\begin{tikzpicture}[#1]%
+}{%
+    \end{tikzpicture}\end{center}%
+}
+
+
+% ---------------------------------PREAMBLE-----------------------------------------
 % typesetting code for a single set
 \newcounter{setquestion}
 \ExplSyntaxOn
@@ -106,7 +138,7 @@
         \seq_shuffle:N \l_questions_seq
     }
     % pdf content for a single set
-    \clearpage\setcounter{page}{1}
+    \setcounter{page}{1}
     \extraheadheight[80pt]{0pt} % extra space for first page header 
     % insert instructions
     \def\insertinstructionsandomr{%
@@ -114,7 +146,7 @@
         {\centering\input{instructions-omr}\par}
         \ExplSyntaxOn
     }
-    \tl_if_eq:NnTF \questionsintwocolumn {true}    
+    \tl_if_eq:NnTF \questionsintwocolumns {true}    
         {\twocolumn[\insertinstructionsandomr]} 
         {\fullwidth{\insertinstructionsandomr}} % hacky way to fix centering
     % start questions
@@ -139,12 +171,15 @@
                 % write to csv file
                 \iow_now:Nx \l_csv_iow {
                     \set, \thesetquestion, ##1, \l_tempa_str,
-                    \getrefnumber{question@\thequestion@correctchoice}}
+                    \getrefnumber{question@\thequestion@correctchoice}
+                }
                 \bigskip\filbreak
             }
         }
     \endgradingrange{\set}
-    \int_do_while:nn {\thepage<=\minnumpagesperset} {\null\clearpage}
+    \int_while_do:nn {\thepage<\numpagesperset} {\clearpage\null}
+    \label{end@\set}
+    \clearpage
 }
 \ExplSyntaxOff
 

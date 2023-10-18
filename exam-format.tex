@@ -1,52 +1,57 @@
+% typeset marks writing
+\def\marks#1{%
+        \ifthenelse{\equal{#1}{0} \or \equal{#1}{1} \or \equal{#1}{\half}}
+        {#1 mark}{#1 marks}%
+}
 % marks instead of points
 \marksnotpoints
 % use first brackets for \subpart
 \renewcommand{\subpartlabel}{(\thesubpart)}
-% use red bold text to show \CorrectChoice
+% use red bold text to show \correctchoice
 \CorrectChoiceEmphasis{\color{red}\bfseries\boldmath}
 % use circled uppercase letters for choices
 \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
-        \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+                \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
 \renewcommand{\choicelabel}{\circled{{\thechoice}}}
 % formatting of Question blocks
 \qformat{
-    \parbox[][24pt][t]{\dimexpr\columnwidth-3pt}{ % for creating space below
-        \Large\textbf{
-            $\diamondsuit$
-            Question \thesetquestion~of \numqinrange{\set}\;
-            \textit{%
-                \hfill%
-                \ifthenelse{\equal{\thequestiontitle}{\thequestion}}%
-                {}%
-                {[\thequestiontitle]\;}%
-                [\ifthenelse{\equal{\totalpoints}{0}}{%
-                        \marks\totalbonuspoints\;(bonus)%
-                    }{%
-                        \marks\totalpoints%
-                        \ifthenelse{\equal{\totalbonuspoints}{0}}
-                        {}
-                        {\,+\,\marks\totalbonuspoints\;(bonus)}%
-                    }%
-                ]%
-            }%
+        \parbox[][24pt][t]{\dimexpr\columnwidth-3pt}{ % for creating space below
+                \Large\textbf{
+                        $\diamondsuit$
+                        Question \thesetquestion~of \numqinrange{\set}\;
+                        \textit{%
+                                \hfill%
+                                \ifthenelse{\equal{\thequestiontitle}{\thequestion}}%
+                                {}%
+                                {[\thequestiontitle]\;}%
+                                [\ifthenelse{\equal{\totalpoints}{0}}{%
+                                                \marks\totalbonuspoints\;(bonus)%
+                                        }{%
+                                                \marks\totalpoints%
+                                                \ifthenelse{\equal{\totalbonuspoints}{0}}
+                                                {}
+                                                {\,+\,\marks\totalbonuspoints\;(bonus)}%
+                                        }%
+                                ]%
+                        }%
+                }%
         }%
-    }%
 }
 % formatting of Bonus Question blocks
 \bonusqformat{
-    \parbox[][24pt][t]{\dimexpr\columnwidth-3pt}{ % for creating space below
-        \Large\textbf{
-            $\diamondsuit$
-            Question \thesetquestion~of \numqinrange{\set}\;
-            \textit{%
-                \hfill%
-                \ifthenelse{\equal{\thequestiontitle}{\thequestion}}
-                {}
-                {[\thequestiontitle]\;}
-                [\marks\totalbonuspoints\;(bonus)]%
-            }%
+        \parbox[][24pt][t]{\dimexpr\columnwidth-3pt}{ % for creating space below
+                \Large\textbf{
+                        $\diamondsuit$
+                        Question \thesetquestion~of \numqinrange{\set}\;
+                        \textit{%
+                                \hfill%
+                                \ifthenelse{\equal{\thequestiontitle}{\thequestion}}
+                                {}
+                                {[\thequestiontitle]\;}
+                                [\marks\totalbonuspoints\;(bonus)]%
+                        }%
+                }%
         }%
-    }%
 }
 % formatting of subpart, subsubpart etc.
 \pointformat{\small\textbf{\textit{[\thepoints]}}}
