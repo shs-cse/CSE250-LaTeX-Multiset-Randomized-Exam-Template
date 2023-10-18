@@ -32,7 +32,7 @@
     \ifdefstring\showsetinheader{true}{%
         \begin{tabular}{|c|}
             \hline
-            \Large Set                          \\
+            \Large Set                       \\
             \hline
             \fontsize{60}{0}\selectfont \set \\
             \hline
@@ -54,7 +54,7 @@
     \coursecode\ifdefined\sect-\sect\fi~\semester\
 }
 {
-    \Large \textbf{\assessment \ifdefined\set{~$\blacktriangleright $ Set \set}\fi}
+    \Large \textbf{\assessment \ifdefstring\showsetinheader{true}{~$\blacktriangleright $ Set \set}{}}
 }
 {
     {Page \thepage~of \numpages}

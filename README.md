@@ -36,19 +36,17 @@ Formatting for these are defined in [`main.tex`](/main.tex) with `\qformat` and 
 Marks/points to each question or part of a question can be allotted using an optional argument. 
 In case you prefer it, there is a built-in `\half` macro for using $\tfrac{1}{2}$ instead of $.5$.
 <table><tr><td>
-<div style="width:300px">
 
 ```latex
-\titledquestion{CO1}[2\half]
+\titledquestion{CO1}[2\half]     
 ```
-<\div>
 </td><td>
 <img width="268" alt="image" src="https://user-images.githubusercontent.com/67824850/217041237-76c9a734-221b-478c-aa12-92f76052826d.png">
 </td></tr></table>
 
 ## Exam Question Set
-You can specify the set (e.g. $\rm A$, $\rm B$ etc.) by defining `\setnum` in [`main.tex`](/main.tex). 
-If not defined or commented, set will not appear in the question header.
+You can specify the set (e.g. $\rm A$, $\rm B$ etc.) by defining `\setbegin` and `\setend` in [`main.tex`](/main.tex). 
+If `\showsetinheader` is false, set will not appear in the question header.
 <table><tr><th>
 Command
 </th><th>
@@ -59,7 +57,7 @@ Other Pages Header
 <tr><td>
 
 ```latex
-\def\setnum{A}
+\def\showsetinheader{true}     
 ```
 </td><td>
 <img width="515" alt="image" src="https://user-images.githubusercontent.com/67824850/217045404-5e7d78fe-6fa1-4016-9c77-06c3fff4e450.png">
@@ -69,7 +67,7 @@ Other Pages Header
 <tr><td>
 
 ```latex
-% \def\setnum{A}
+\def\showsetinheader{false}     
 ```
 </td><td>
 <img width="515" alt="image" src="https://user-images.githubusercontent.com/67824850/217045232-6ceb8cf5-9c7c-4115-8d8f-49d093e2e915.png">
@@ -78,15 +76,39 @@ Other Pages Header
 </td></tr></table>
 
 ## Course Section & Faculty Name
-Just like the set, course section and faculty name can either be defined using `\sect` and `\faculty`, or can be omitted.
+Just like the set, course section and faculty name can either be defined using `\sect` and `\faculty`, or can be omitted by commenting.
+<table><tr><td>
+
+```latex
+\def\sect{18,14}     
+\def\faculty{SDS}     
+```
+</td><td>
+<img width="136" alt="image" src="https://github.com/shs-cse/CSE250-LaTeX-Multiset-Randomized-Exam-Template/assets/67824850/825af69b-28ba-4613-b421-5e198205fc4c">
+</td></tr>
+<tr><td>
+
+```latex
+\def\sect{18,14}     
+% \def\faculty{SDS}     
+```
+</td><td>
+<img width="136" alt="image" src="https://github.com/shs-cse/CSE250-LaTeX-Multiset-Randomized-Exam-Template/assets/67824850/12dea179-d6b1-486b-b6dd-8e5f153ce52a">
+</td></tr><tr><td>
+
+```latex
+% \def\sect{18,14}     
+\def\faculty{SDS}     
+```
+</td><td>
+<img width="136" alt="image" src="https://github.com/shs-cse/CSE250-LaTeX-Multiset-Randomized-Exam-Template/assets/67824850/990b2d18-6b7b-4f63-936f-baa7a247c8e2">
+</td></tr></table>
 
 ## Date of Exam
 By default it uses current date on the question header and everywhere else (using `\today`). 
-However, if the question should be printed some days later, it can be done by advancing by that amount of days in [`main.tex`](/main.tex). 
-Negative numbers can also be used for using previous days.
-By default it is set to `0`.
+However, if the question should be printed for a different day, it can be done by defining `\date` in [`main.tex`](/main.tex). 
 ```latex
-\advance\day by 0
+\def\date{September 28, 2023} % can be set to \today by commenting
 ```
 
 ## Solutions
@@ -97,7 +119,7 @@ These can be shown by including `answers` argument in the documentclass declarat
 <table><tr><td>
 
 ```latex
-\documentclass[a4paper, addpoints]{exam}
+\documentclass[a4paper, addpoints]{exam}     
 ```
 </td><td>
 <img width="485" alt="image" src="https://user-images.githubusercontent.com/67824850/217028070-d8a10e83-78d2-497e-85fc-d67210c34e9a.png">
@@ -105,8 +127,15 @@ These can be shown by including `answers` argument in the documentclass declarat
 <tr><td>
 
 ```latex
-\documentclass[a4paper, addpoints, answers]{exam}
+\documentclass[addpoints, a4paper]{exam}     
+\printanswers % comment to hide answers     
 ```
 </td><td>
 <img width="485" alt="image" src="https://user-images.githubusercontent.com/67824850/217027839-480caeb4-04fe-4390-88cc-7fa5683c6bfe.png">
 </td></tr></table>
+
+## Question Shuffling
+The order of questions are shuffled by default. If not desired, it can be turned off by setting `\shufflequestionorder` to `false`.
+```latex
+\def\shufflequestionorder{true} % false -> no question shuffling
+```
