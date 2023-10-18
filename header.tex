@@ -1,0 +1,61 @@
+% \usepackage{showframe}
+\pagestyle{head}
+% dimensions
+\extrawidth{72pt}
+\addtolength{\topmargin}{-16pt} % pull up all the headers
+\addtolength{\textwidth}{32pt}
+\addtolength{\oddsidemargin}{-16pt}
+\addtolength{\evensidemargin}{-16pt}
+\extrafootheight{-80pt} % push down the footer out of page 
+\headrule
+% first page styling
+\extraheadheight[80pt]{0pt} % extra space for first page header 
+\firstpageheader{
+    \textsf{\textbf{\large Brac University}}\\
+    Semester: \semester\\
+    Course Code: \coursecode\\
+    \coursename
+    \ifdefined\sect
+        \\Section: \sect
+    \fi
+    \ifdefined\faculty
+        \\Faculty: \faculty
+    \fi
+}
+{
+    \begin{tabular}{|m{2in}|m{2.5in} m{0in}|}
+        \hline
+        ID: & Name: & \rule{0pt}{24pt} \\
+        \hline
+    \end{tabular}\\
+    \vspace{1em}
+    \ifdefstring\showsetinheader{true}{%
+        \begin{tabular}{|c|}
+            \hline
+            \Large Set                          \\
+            \hline
+            \fontsize{60}{0}\selectfont \set \\
+            \hline
+        \end{tabular}\\
+        \vspace{-3pt}
+    }{%
+        \vspace{56pt}
+    }
+}
+{
+    \includegraphics[height=0.75in]{bracu_logo.png}\\
+    Assessment: \textit{\assessment}\\
+    Duration: \duration \\
+    Date: \ifdefined\date\date\else\today\fi\\
+    Full Marks\ifthenelse{\equal{\numbonuspoints}{0}}{}{~(incl. bonus \bonuspointsinrange{\set})}: \pointsinrange{\set}%
+}
+% other pages styling
+\runningheader{
+    \coursecode\ifdefined\sect-\sect\fi~\semester\
+}
+{
+    \Large \textbf{\assessment \ifdefined\set{~$\blacktriangleright $ Set \set}\fi}
+}
+{
+    {Page \thepage~of \numpages}
+}

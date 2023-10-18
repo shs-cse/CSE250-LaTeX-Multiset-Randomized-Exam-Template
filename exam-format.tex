@@ -1,0 +1,54 @@
+% marks instead of points
+\marksnotpoints
+% use first brackets for \subpart
+\renewcommand{\subpartlabel}{(\thesubpart)}
+% use red bold text to show \CorrectChoice
+\CorrectChoiceEmphasis{\color{red}\bfseries\boldmath}
+% use circled uppercase letters for choices
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+\renewcommand{\choicelabel}{\circled{{\thechoice}}}
+% formatting of Question blocks
+\qformat{
+    \parbox[][24pt][t]{\columnwidth}{ % for creating space below
+        \Large\textbf{
+            $\diamondsuit$
+            Question \thesetquestion~of \numqinrange{\set}\;
+            \textit{%
+                \hfill%
+                \ifthenelse{\equal{\thequestiontitle}{\thequestion}}%
+                    {}%
+                    {[\thequestiontitle]\;}%
+                [\ifthenelse{\equal{\totalpoints}{0}}{%
+                        \marks\totalbonuspoints\;(bonus)%
+                    }{%
+                        \marks\totalpoints%
+                        \ifthenelse{\equal{\totalbonuspoints}{0}}
+                        {}
+                        {\,+\,\marks\totalbonuspoints\;(bonus)}%
+                    }%
+                ]%
+            }%
+        }%
+    }%
+}
+% formatting of Bonus Question blocks
+\bonusqformat{
+    \parbox[][24pt][t]{\columnwidth}{ % for creating space below
+        \Large\textbf{
+            $\diamondsuit$
+            Question \thesetquestion~of \numqinrange{\set}\;
+            \textit{%
+                \hfill%
+                \ifthenelse{\equal{\thequestiontitle}{\thequestion}}
+                    {}
+                    {[\thequestiontitle]\;}
+                [\marks\totalbonuspoints\;(bonus)]%
+            }%
+        }%
+    }%
+}
+% formatting of subpart, subsubpart etc.
+\pointformat{\small\textbf{\textit{[\thepoints]}}}
+% formatting of bonussubpart, bonussubsubpart etc.
+\bonuspointformat{\small\textbf{\textit{[\thepoints]}}}
