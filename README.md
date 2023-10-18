@@ -7,8 +7,6 @@ Summarized instructions for creating a question:
 Inside [`questions/`](/questions/) folder, create a new `.tex` file numbered from `1` (or `01`) to `99`. 
 Any skipped file number will automatically be filled sequentially.
 
-If you want to have different questions for each set, you may create folders for them. For example, [`questions/A/01.tex`](/questions/A/01.tex) will replace (or add) [`questions/01.tex`](/questions/01.tex) for set `A`.
-
 Each `.tex` file should contain a `\titledquestion` or `\bonustitledquestion`. Each such questions may contain parts and subparts:
 
 ```latex
@@ -27,6 +25,9 @@ questions
         └── \bonussubpart
 ```
 
+## Set-specific questions
+If you want to have different questions for each set, you may create folders for them. For example, [`questions/A/01.tex`](/questions/A/01.tex) will replace (or add) [`questions/01.tex`](/questions/01.tex) for set `A`.
+
 ## CO/PO Mapping
 For mapping course/program outcome (CO/PO) with a question, please use `\titledquestion{CO1}` and `\bonustitledquestion{CO2}` 
 Formatting for these are defined in [`main.tex`](/main.tex) with `\qformat` and `\bonusqformat`.
@@ -35,10 +36,12 @@ Formatting for these are defined in [`main.tex`](/main.tex) with `\qformat` and 
 Marks/points to each question or part of a question can be allotted using an optional argument. 
 In case you prefer it, there is a built-in `\half` macro for using $\tfrac{1}{2}$ instead of $.5$.
 <table><tr><td>
+<div style="width:300px">
 
 ```latex
 \titledquestion{CO1}[2\half]
 ```
+<\div>
 </td><td>
 <img width="268" alt="image" src="https://user-images.githubusercontent.com/67824850/217041237-76c9a734-221b-478c-aa12-92f76052826d.png">
 </td></tr></table>
